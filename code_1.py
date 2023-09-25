@@ -16,11 +16,6 @@ import csv
 start = time.time()
 
 df = pd.read_csv("D:/Users/dunca/Desktop/2023/Modules/DS/Project/higgs-boson/training/training.csv") # Constructing the DataFrame.
-
-# nanval = (df.iat[2, 1]) ## We use this if we wish to replace the values in the dataframe that cannot be computed.
-# df.replace(to_replace=nanval, value=np.nan, inplace=True) # This will replace the nominal -999 with a Nan, however the regular NN cannot process these
-#                                                           # so if we swish to use this then we need to skip over Nan paramters in our NN architecture.
-
 print(df)
 
 
@@ -229,26 +224,9 @@ for i in range(len(train_bg_hist)):
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+##########################################################
+################## KAGGLE SUBMISSION #####################
+##########################################################
 
 
 df_testset = pd.read_csv("D:/Users/dunca/Desktop/2023/Modules/DS/Project/higgs-boson/test/test.csv")
@@ -257,31 +235,8 @@ df_testset = pd.read_csv("D:/Users/dunca/Desktop/2023/Modules/DS/Project/higgs-b
 labels_testset = df_testset.columns[1:] # Dataframe headings.
 tensor_testset = torch.tensor(df_testset[labels_testset].values.astype(float)).float() # Here we have our tensor
 testset_results = f(tensor_testset).detach().numpy()
-#
-# eventID = np.array(df_testset[df_testset.columns[0]].values.astype(float))
-#
-# testset_hist, bins_testset, patches_testset = plt.hist(testset_results, alpha=0)
-#
-# s_testset = []
-# b_testset = []
-# for i in range(len(testset_results)):
-#
-#     if testset_results[i] >= 0.5:
-#         s_testset.append(testset_results[i][0])
-#     else:
-#         b_testset.append(testset_results[i][0])
-#
-# s_testset = np.array(s_testset)
-# b_testset = np.array(b_testset)
-#
-#
-# bins = np.array([0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1])
-# centers = bins[1:] - 0.05
 
-# sig_hist = plt.hist(s_testset, bins=bins, density=True, stacked=True, color="red", alpha=0.4)
-# bg_hist = plt.hist(b_testset, bins=bins, density=True, stacked=True, color="blue", alpha=0.4)
-#
-# plt.show()
+
 
 IDshift = 350000
 
@@ -306,8 +261,6 @@ for i in range(len(final)):
         submission[2].append("s")
     else:
         submission[2].append("b")
-
-# f = open("D:/Users/dunca/Desktop/2023/Modules/DS/Project/submission.csv", "w")
 
 data = []
 for i in range(len(final)):
